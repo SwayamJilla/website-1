@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>无标题文档</title>
+<link rel="stylesheet"  href="css/bootstrap.css"/>
+<style>
+body{margin:0;padding:0;background:#039;}
+h2{font-size:56px;text-align:center;color:white;}
+#box{width:1000px;height:660px;background:#FFF;margin:20px auto;}
+#left{width:390px;height:660px;position:absolute;z-index:2;}
+#left img{width:390px;height:660px;}
+#left ul{width:30px;height:60px;position:absolute;top:40px;left:300px;}
+#left ul li{width:16px;height:16px;background:#999;border-radius:8px;float:left;border:none;margin-bottom:10px;cursor:pointer;list-style:none;}
+#left ul .active{background:#FC0;}
+#right{width:610px;height:660px;position:relative;}
+#right #nav{width:550px;height:100px;position:absolute;top:30px;left:440px;border-bottom:1px solid #CCC;}
+#right #nav a{font-size:24px;margin-right:30px;line-height:50px;text-decoration:none;}
+#right #nav input{width:210px;height:30px;border:none;background:#CCC;text-indent:3em;font-size:18px;}
+#right #nav .active1{color:red;}
+#right #nav .glyphicon{position:absolute;top:14px;font-size:22px;color:red;margin-left:10px;background:white;border:none;}
+#content{width:550px;height:500px;position:absolute;top:150px;}
+#content h3{position:absolute;top:-10px;left:430px;width:500px;}
+#content h4{position:absolute;top:30px;left:430px;width:500px;font-weight:normal;font-size:20px;}
+#content p{width:550px;position:absolute;top:80px;left:430px;font-size:14px;color:#999;}
+#content h5{position:absolute;top:170px;left:430px;font-size:20px;}
+#content #select1{position:absolute;top:176px;left:500px;width:60px;height:30px;}
+#content h6{position:absolute;top:230px;left:430px;font-size:20px;}
+#content #amount{width:260px;height:60px;position:absolute;top:240px;left:530px;}
+#content #amount input{margin-right:40px;width:22px;height:22px;border:1px solid #999;font-size:16px;text-align:center;line-height:22px;}
+#content #amount p{position:absolute;top:0px;left:32px;color:black;width:22px;height:22px;background:#F00;text-align:center;color:white;}
+#content #price{position:absolute;top:320px;left:434px;font-size:30px;color:#666;}
+.btn-group{width:600px;height:100px;position:absolute;top:400px;left:430px;}
+.btn-group button{margin-right:60px;width:200px;height:40px;text-align:center;font-size:18px;}
+.btn-group .glyphicon{font-size:20px;}
+#share{width:200px;height:100px;position:absolute;top:320px;left:770px;}
+#share a{margin-right:30px;text-decoration:none;}
+#share .f{width:40px;height:40px;background:#039;display:inline-block;border-radius:20px;text-align:center;color:white;font-size:24px;font-weight:bold;line-height:40px;position:absolute;top:0px;left:0px;}
+#share .g{width:40px;height:40px;background:#C03;display:inline-block;border-radius:20px;text-align:center;color:white;font-size:20px;font-weight:bold;line-height:40px;position:absolute;top:0px;left:70px;}
+</style>
+<script>
+window.onload=function(){
+	var oLeft=document.getElementById("left");
+	var oRight=document.getElementById("right");
+	var oImg=oLeft.getElementsByTagName("img")[0];
+	var oUl=document.getElementsByTagName("ul")[0];
+	var arrUrl=["img/1.jpg","img/2.jpg","img/3.jpg"];
+	var aLi=oUl.getElementsByTagName("li");
+	var oNav=document.getElementById("nav");
+	var oInp=oNav.getElementsByTagName("input")[0];
+	var oAmount=document.getElementById("amount");
+	var oP=oAmount.getElementsByTagName("p")[0];
+	var aBtn=oAmount.getElementsByTagName("input");
+	var aBtn1=oRight.getElementsByTagName("button");
+	var aA=oRight.getElementsByTagName("a");
+	var num=0;
+	var timer=null;
+	function autoPlay(){
+		timer=setInterval(function(){
+			num++;
+			num%=arrUrl.length;
+			fnTab();
+			},2000)
+		}
+	autoPlay();
+	for(var i=0;i<arrUrl.length;i++){
+		oUl.innerHTML+="<li></li>";
+		}
+	function fnTab(){
+		oImg.src=arrUrl[num];
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].className="";
+			}
+		aLi[num].className="active";
+		}
+		
+	fnTab();
+	for(var i=0;i<aLi.length;i++){
+		aLi[i].index=i;
+		aLi[i].onclick=function(){
+			num=this.index;
+			fnTab();
+			}
+		}
+	oImg.onmouseover=function(){
+		clearInterval(timer);
+		}
+	/*oImg.onmouseout=function(){
+		autoPlay();
+		
+		}*/
+	oImg.onmouseout=autoPlay;
+	//alert(aInp.length)
+	oInp.onclick=function(){
+		this.value="";
+		}
+		
+	oInp.onmouseout=function(){
+		this.value="Search......";
+		}
+		
+	aBtn[0].onclick=function(){
+		num--;
+		if(num<1){
+			num=1;
+			
+			}
+		oP.innerHTML=num;
+		}
+	aBtn[1].onclick=function(){
+		num++;
+		oP.innerHTML=num;
+		}
+	for(var i=0;i<aBtn1.length;i++){
+		aBtn1[i].onmouseover=function(){
+			this.style.background="#333";
+			this.style.border="none";
+			}
+		aBtn1[i].onmouseout=function(){
+			this.style.background="";
+			this.style.border="";
+			}
+		}
+	
+	aA[3].onmouseover=function(){
+			this.style.background="white";
+			this.style.border="2px solid #039";
+			this.style.color="#039";
+			}
+	aA[4].onmouseover=function(){
+			this.style.background="white";
+			this.style.border="2px solid #C03";
+			this.style.color="#C03";
+			}
+	for(var i=0;i<aA.length;i++){
+		aA[i].onmouseout=function(){
+			this.style.background="";
+			this.style.border="";
+			this.style.color="";
+			}
+		}
+		
+}
+</script>
+</head>
+<body>
+<h2>PRODUCTS SALES</h2>
+<div id="box">
+    <div id="left">
+        <img src="img/1.jpg">
+        <span></span>
+        <ul>
+        </ul>
+    </div>
+    <div id="right" class="col-lg-4">
+	    <div id="nav">
+            <a href="#" class="active1">jeans</a>
+            <a href="#">coats</a>
+            <a href="#">shirts</a>
+            <input type="text" value="Search......">
+            <button class="glyphicon glyphicon-search"></button>
+        </div>
+        <div id="content">
+            <h3>MOTO Vintage Knee Rip Jamie Jeans</h3>
+            <h4>Products details</h4>
+            <p>MOTO high rise, ankle grazing skinny jeans in vintage power stretch denim with one knee rip. 93% Cotton, 5% Viscose, 2% Elastane. Machine wash.</p>
+            <h5>Size:</h5>
+            <select id="select1">
+                <option value="2430">2430</option>
+                <option value="2630">2630</option>
+                <option value="2830">2830</option>
+                <option value="3030">3030</option>
+            </select>
+            <h6>Quality:</h6>
+            <div id="amount">
+                <input type="button" value="-">
+                <p>1</p>
+                <input type="button" value="+">
+            </div>
+            <p id="price">£42.00</p>
+            <div id="share">
+                <a class="f" href="#">f</a>
+                <a class="g" href="#">G+</a>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-default btn-danger">Add to bag    <span class="glyphicon glyphicon-lock"></span></button>
+                <button class="btn btn-default btn-danger">Add to wishlist    <span class="glyphicon glyphicon-heart-empty"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!--<script src="js/jquery-3.3.1.js"></script>
+<script src="js/bootstrap.js"></script>-->
+</html>
